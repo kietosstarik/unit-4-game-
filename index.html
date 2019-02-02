@@ -190,12 +190,10 @@
               
                update_score(0);
               
-               /* setting intial information using jquery basic selector and html() */
                $('#rand').html(rand);
                $('#win').html(win);
                $('#loss').html(loss);
               
-               /* setting up click event for each jewel using jquery click */
                $('#jewel1').click(function(){
                    update_score(jewel1);
                   
@@ -215,23 +213,19 @@
                    update_score(jewel4);
                   
                });
-               /*function to update score */  
                function update_score(s){
                    score = score+s;
                    $('#score').html(score);
-                  
-                      /*if score is equals to random number than it will be win */  
+                   
                    if(rand == score){
                        set_win();
                       
-                       }else if(rand < score){     /*if score is greater than to random number than it will be loss */  
+                       }else if(rand < score){     
                        set_loss();
                    }
                   
                }
               
-              
-               /* setting up win an loss */
                function set_win(){
                   
                    win = win+1;
@@ -246,7 +240,6 @@
                    reset();
                   
                }
-               /* varable and information should be resetted after each game */
               
                function reset(){
                    jewel1 = Math.floor((Math.random() * 12) + 1);
