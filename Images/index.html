@@ -1,0 +1,266 @@
+<html lang="en">
+  
+   <head>
+       <title>Game</title>
+       <script
+       src="http://code.jquery.com/jquery-3.3.1.min.js"
+       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+       crossorigin="anonymous"></script>
+   </head>
+  
+   <body>
+       <div class="col-12">
+           <div class="row">
+               <div class="col-6 title">
+                   <h3>Coin Collector - Case Pollock</h3>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-8 instruction">
+                   <ul>
+                       <li>A random number will appear at the start of the game </li>
+                       <li>There are four coins below. By clicking on a coin you will add a specific amount of points to your total score. </li>
+                       <li>You win the game if your total score equals the random number. You will lose if your score exceeds the random number.
+                          
+                       </li>
+                       <li>The value of each coin is not known until you press on it</li>
+                       <li>For each new game the needed score and points for each coin will change. </li>
+                       <ul>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-3 random">
+                           <h1 id="rand">39</h1>
+                       </div>
+                       <div class="col-2 winloss">
+                           <ul>
+                               <li> Win: <span id="Win"></span></li>
+                               <li> Loss: <span id="Loss"></span></li>
+                              
+                           </ul>
+                          
+                       </div>
+                   </div>
+                  
+                  
+                  
+                   <div class="row jewels" >
+                      
+                       <div class="col-1" id="jewel1">
+                       <img src="coin1.jpg" style= "width:100px; height:100px;">
+                          
+                       </div>
+                       <div class="col-1" id="jewel2">
+                           <img src="coin2.jpg" style= "width:100px; height:100px;">
+                          
+                       </div>
+                       <div class="col-1" id="jewel3">
+                           <img src="coin3.jpg" style= "width:100px; height:100px;">
+                          
+                       </div>
+                       <div class="col-1" id="jewel4">
+                           <img src="coin4.jpg" style= "width:100px; height:100px;">
+                          
+                       </div>
+                   </div>
+                  
+                   <div class="row">
+                      
+                       <h3 class="score col-6"> Your Score is </h3>
+                   </div>
+                   <div class="row">
+                       <div class="col-4 score">
+                           <h2 id="score">0</h2>
+                       </div>
+                   </div>
+                  
+               </div>
+              
+              
+              
+           </body>
+          
+           <style>
+               .jewels div{
+               min-height:100px;
+               min-width:100px;
+               background:white;
+               margin-left:10px;
+              
+               }
+               .col-12{
+                background: white;
+                width:100%;
+               float:left;
+              
+               padding:10px;
+               }
+               .col-1{
+                width:8%;
+               float:left;
+              
+               padding:6px;
+               }
+               .col-2{
+                width:23%;
+               float:left;
+              
+               padding:15.5px;
+               }
+               .col-3{
+                width:23%;
+               float:left;
+              
+               padding:10px;
+               }
+               .col-4{
+                width:48%;
+               float:left;
+              
+               padding:10px;
+               }
+               .col-6{
+                width:48%;
+               float:left;
+              
+               padding:10px;
+               }
+               .col-8{
+                width:48%;
+               float:left;
+              
+               padding:10px;
+               }
+               .row{
+               width:100%;
+               overflow:hidden;
+               padding:10px;
+               }
+              
+               .instruction{
+               color:green;
+               font-weight:bold;
+               font-size:18px;
+              
+              
+               background:#f5d6ba;
+               }
+              
+               .instruction ul{
+               list-style:none;
+               }
+               .instruction ul li{
+               margin-top:15px;
+               }
+               .title{
+               background: teal;
+               color:white;
+               font-size:26px;
+              
+               }
+               .random{
+               background:teal;
+               }
+               .winloss{
+               background:#00e2e0;
+              
+               }
+              
+               .score{
+               color:white;
+               background:#016b6b;
+               }
+              
+              
+           </style>
+          
+           <script>
+               var jewel1 = Math.floor((Math.random() * 12) + 1);
+               var jewel2 = Math.floor((Math.random() * 12) + 1);
+               var jewel3 = Math.floor((Math.random() * 12) + 1);
+               var jewel4 = Math.floor((Math.random() * 12) + 1);
+              
+               var score = 0;
+               var win = 0;
+               var loss = 0;
+              
+               var rand = Math.floor((Math.random() * 120) + 19);
+              
+               update_score(0);
+              
+               /* setting intial information using jquery basic selector and html() */
+               $('#rand').html(rand);
+               $('#win').html(win);
+               $('#loss').html(loss);
+              
+               /* setting up click event for each jewel using jquery click */
+               $('#jewel1').click(function(){
+                   update_score(jewel1);
+                  
+               });
+              
+               $('#jewel2').click(function(){
+                   update_score(jewel2);
+                  
+               });
+              
+               $('#jewel3').click(function(){
+                   update_score(jewel3);
+                  
+               });
+              
+               $('#jewel4').click(function(){
+                   update_score(jewel4);
+                  
+               });
+               /*function to update score */  
+               function update_score(s){
+                   score = score+s;
+                   $('#score').html(score);
+                  
+                      /*if score is equals to random number than it will be win */  
+                   if(rand == score){
+                       set_win();
+                      
+                       }else if(rand < score){     /*if score is greater than to random number than it will be loss */  
+                       set_loss();
+                   }
+                  
+               }
+              
+              
+               /* setting up win an loss */
+               function set_win(){
+                  
+                   win = win+1;
+                   alert('You won');
+                   reset();
+                  
+               }
+              
+               function set_loss(){
+                   loss = loss+1;
+                   alert('You are not smart');
+                   reset();
+                  
+               }
+               /* varable and information should be resetted after each game */
+              
+               function reset(){
+                   jewel1 = Math.floor((Math.random() * 12) + 1);
+                   jewel2 = Math.floor((Math.random() * 12) + 1);
+                   jewel3 = Math.floor((Math.random() * 12) + 1);
+                   jewel4 = Math.floor((Math.random() * 12) + 1);
+                  
+                   score = 0;
+                   update_score(0);
+                   rand = Math.floor((Math.random() * 120) + 19);
+                   $('#rand').html(rand);
+                   $('#win').html(win);
+                   $('#loss').html(loss);
+                  
+                  
+               }
+           </script>
+          
+           </html>
